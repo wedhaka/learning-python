@@ -46,15 +46,17 @@ for line in handle:
     pieces = line.split(',')
     if len(pieces) < 7 : continue
 
-    name = pieces[0]
-    artist = pieces[1]
-    album = pieces[2]
-    count = pieces[3]
-    rating = pieces[4]
-    length = pieces[5]
-    genreName = pieces[6]
+    name = pieces[0].strip()
+    artist = pieces[1].strip()
+    album = pieces[2].strip()
+    count = pieces[3].strip()
+    rating = pieces[4].strip()
+    length = pieces[5].strip()
+    genreName = pieces[6].strip()
 
     #print(name, artist, album, count, rating, length, genreName)
+    # if name is None or artist is None or album is None or count is None or rating is None or genreName is None:
+    #     continue
     
     cur.execute('''INSERT OR IGNORE INTO Artist (name) 
         VALUES ( ? )''', ( artist, ) )
@@ -75,6 +77,8 @@ for line in handle:
         (title, album_id, genre_id, len, rating, count) 
         VALUES ( ?, ?, ?, ?, ?, ? )''', 
         ( name, album_id, genre_id, length, rating, count ) )
+    
+conn.commit()
 
 #read data
 sqlstar = '''SELECT Track.title, Artist.name, Album.title, Genre.name
@@ -82,7 +86,7 @@ sqlstar = '''SELECT Track.title, Artist.name, Album.title, Genre.name
     JOIN Genre ON Track.genre_id = Genre.id
     JOIN Album ON Track.album_id = Album.id
     JOIN Artist ON Album.artist_id = Artist.id
-    ORDER BY Artist.name
+    ORDER BY Artist.name, Track.title
     LIMIT 3'''
 
 html = "<table border='1'><tr><td>Track</td><td>Artist</td><td>Album</td><td>Genre</td><td></tr>"
