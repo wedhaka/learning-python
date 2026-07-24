@@ -110,16 +110,14 @@ def exchangeable_value(budget, exchange_rate, spread, denomination):
     determining the exchange rate plus the spread.
     """
 
-    # getLeftoverOfBills = get_leftover_of_bills(exchangeMoney, denomination)
-    print(f'exchange_rate: {exchange_rate}', f'budget {budget}', f'spread: {spread}') 
+    # 1. Calculate actual rate including spread
+    actual_fee = exchange_rate * (1 + spread / 100)
     
-    actualFee = exchange_rate + (exchange_rate * spread/100)
+    # 2. Convert budget to foreign currency
+    exchanged_money = exchange_money(budget, actual_fee)
     
-    exchangeMoney = exchange_money(budget, actualFee)
-    getNumberofBills = get_number_of_bills(exchangeMoney, 1)
-    print(f'actualFee: {actualFee}', exchangeMoney, getNumberofBills) 
+    # 3. Calculate whole bills from the EXCHANGED money
+    number_of_bills = get_number_of_bills(exchanged_money, denomination)
     
-    return getNumberofBills;
-
-
-exchangeable_value(1500, 0.84, 25, 40)
+    # 4. Calculate total value in bills
+    return int(get_value_of_bills(denomination, number_of_bills))
