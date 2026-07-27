@@ -33,28 +33,18 @@ def higher_card(card_one, card_two):
         str or tuple: The resulting tuple contains both cards if they are of equal value.
     """
 
-    # (card_one, card_two) = (value_of_card(card_one), value_of_card(card_two))
+    card_one_value = value_of_card(card_one)
+    card_two_value = value_of_card(card_two)
 
-    new_card_one = ""
-    new_card_two = ""
-
-    if isinstance(card_one, int): 
-        new_card_one = str(card_one)
+    if card_one_value == card_two_value :
+        return card_one, card_two
+    elif card_one_value > card_two_value : 
+        return str(card_one)
     else :
-        new_card_one = card_one
-
-    if isinstance(card_two, int): 
-        new_card_two = str(card_two)
-    else :
-        new_card_two = card_two
-                   
-
-    return new_card_one, new_card_two
+        return str(card_two)
     
-
 def value_of_ace(card_one, card_two):
     """Calculate the most advantageous value for an upcoming ace card.
-
     Parameters:
         card_one (str): First card dealt in the hand.  See below for values.
         card_two (str): Second card dealt in the hand. See below for values.
@@ -62,11 +52,25 @@ def value_of_ace(card_one, card_two):
         1.  'J', 'Q', or 'K' (otherwise known as "face cards") = 10
         2.  'A' (ace card) = 11 (if already in hand)
         3.  '2' - '10' = numerical value.
-
     Returns:
         int: Either 1 or 11, which is the value of the upcoming ace card.
     """
 
+    card_one_value = value_of_card(card_one)
+    card_two_value = value_of_card(card_two)
+
+    
+    if card_one_value == 1 or card_two_value == 1 :
+        return 1
+    elif (card_one_value + card_two_value) <= 10 and ( not card_one_value == 1 or not card_two_value == 1 ) :
+        return 11
+    elif card_one_value == card_two_value :
+        return 1
+    elif (card_one_value + card_two_value) % 10 > 0 : 
+        return 1
+    else :
+        return 11
+    
 def is_blackjack(card_one, card_two):
     """Determine if the hand is a 'natural' or 'blackjack'.
 
@@ -82,6 +86,17 @@ def is_blackjack(card_one, card_two):
         bool: Is the hand is a blackjack (two cards worth 21).
     """
 
+    blackjack = value_of_card(card_one) + value_of_card(card_two)
+
+    if blackjack == 21 :
+        return True
+    elif value_of_card(card_one) == 1 and value_of_card(card_two) == 10 :
+        return True
+    elif value_of_card(card_one) == 10 and value_of_card(card_two) == 1 :
+        return True
+
+    return False
+
 def can_split_pairs(card_one, card_two):
     """Determine if a player can split their hand into two hands.
 
@@ -91,8 +106,15 @@ def can_split_pairs(card_one, card_two):
 
    Returns:
         bool: Can the hand be split into two pairs? (i.e. cards are of the same value).
-    """
+    """   
+    card_one_value = value_of_card(card_one)
+    card_two_value =  value_of_card(card_two)
 
+    if card_one_value == card_two_value :
+        return True
+
+    return False
+    
 def can_double_down(card_one, card_two):
     """Determine if a blackjack player can place a double down bet.
 
@@ -103,6 +125,15 @@ def can_double_down(card_one, card_two):
     Returns:
         bool: Can the hand can be doubled down? (i.e. totals 9, 10 or 11 points).
     """
+    card_one_value = value_of_card(card_one)
+    card_two_value =  value_of_card(card_two)
 
-
-print(higher_card(3, "A"))
+    if card_one_value + card_two_value == 9 :
+        return True
+    elif card_one_value + card_two_value == 10 :
+        return True
+    elif card_one_value + card_two_value == 11 :
+        return True
+        
+    return False
+    
