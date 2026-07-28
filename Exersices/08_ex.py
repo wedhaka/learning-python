@@ -32,7 +32,8 @@ def make_word_groups(vocab_words):
         else :
             new_list = new_list + " :: " + prefix + word
 
-    return new_list  
+    return new_list
+    
 
 def remove_suffix_ness(word):
     """Remove the suffix from the word while keeping spelling in mind.
@@ -51,12 +52,11 @@ def remove_suffix_ness(word):
         'sad'
 
     """
-
+    
     modified_word = word.removesuffix("ness")
 
     if modified_word[-1] == "i" :
         return modified_word[:-1] + "y"
-
 
     return modified_word
     # pass
@@ -80,8 +80,12 @@ def adjective_to_verb(sentence, index):
         'blacken'
 
     """
+    array_sentence = sentence.split()
 
-    pass
+    if array_sentence[index][-1] == "." :
+        return array_sentence[index][:-1] + "en"
 
+    return array_sentence[index] + 'en'
+    
 
-print(remove_suffix_ness("heaviness"))
+print(adjective_to_verb("His expression went dark.", -1))
