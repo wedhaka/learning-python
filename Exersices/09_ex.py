@@ -3,7 +3,6 @@
 Python list documentation: https://docs.python.org/3/tutorial/datastructures.html
 """
 
-
 def get_rounds(number):
     """Create a list containing the current and next two round numbers.
 
@@ -13,37 +12,30 @@ def get_rounds(number):
     Returns:
         list: The current round number and the two that follow.
     """
-
-    pass
-
+    return [i + number for i in range(3)]
 
 def concatenate_rounds(rounds_1, rounds_2):
     """Concatenate two lists of round numbers.
-
     Parameters:
         rounds_1 (list): The first rounds played.
         rounds_2 (list): The second group of rounds played.
-
     Returns:
         list:  All rounds played.
     """
-
-    pass
-
-
+    return rounds_1 + rounds_2
+    
 def list_contains_round(rounds, number):
     """Check if the list of rounds contains the specified number.
-
     Parameters:
         rounds (list): The rounds played.
         number (int): The round number.
-
     Returns:
         bool: Was the round played?
     """
+    if number in rounds :
+        return True
 
-    pass
-
+    return False
 
 def card_average(hand):
     """Calculate and returns the average card value from the list.
@@ -54,9 +46,7 @@ def card_average(hand):
     Returns:
         float: The average value of the cards in the hand.
     """
-
-    pass
-
+    return sum(hand)/len(hand)
 
 def approx_average_is_average(hand):
     """Return if the (average of first and last card values) OR ('middle' card) == calculated average.
@@ -67,10 +57,19 @@ def approx_average_is_average(hand):
     Returns:
         bool: Does one of the approximate averages equal the `true average`?
     """
+    card_avg = card_average(hand)
+    new_array = hand[:-1][1:]
+    middle_array = (hand[1] + hand[-1])
+    st_end_array = (hand[1] + hand[-1]) / 2
 
-    pass
+    print(st_end_array, new_array, card_avg)
 
-
+    if card_avg == card_average(new_array) :
+        return True
+    elif  st_end_array == card_avg :
+        return True
+    return False
+    
 def average_even_is_average_odd(hand):
     """Return if the (average of even indexed card values) == (average of odd indexed card values).
 
@@ -81,8 +80,10 @@ def average_even_is_average_odd(hand):
         bool: Are the even and odd averages equal?
     """
 
-    pass
-
+    if card_average(hand) == hand[len(hand) // 2]: 
+        return True
+    
+    return False
 
 def maybe_double_last(hand):
     """Multiply a Jack card value in the last index position by 2.
@@ -95,3 +96,6 @@ def maybe_double_last(hand):
     """
 
     pass
+
+
+print(approx_average_is_average([1, 2, 4, 5, 8]))
