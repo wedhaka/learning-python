@@ -70,32 +70,3 @@ def approx_average_is_average(hand):
         return True
     return False
     
-def average_even_is_average_odd(hand):
-    """Return if the (average of even indexed card values) == (average of odd indexed card values).
-
-    Parameters:
-        hand (list): The cards in the hand.
-
-    Returns:
-        bool: Are the even and odd averages equal?
-    """
-
-    if card_average(hand) == hand[len(hand) // 2]: 
-        return True
-    
-    return False
-
-def maybe_double_last(hand):
-    """Multiply a Jack card value in the last index position by 2.
-
-    Parameters:
-        hand (list): The cards in the hand.
-
-    Returns:
-        list: The hand with Jacks (if present) value doubled.
-    """
-
-    pass
-
-
-print(approx_average_is_average([1, 2, 4, 5, 8]))
