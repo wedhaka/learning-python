@@ -59,12 +59,12 @@ def approx_average_is_average(hand):
     """
     card_avg = card_average(hand)
     new_array = hand[:-1][1:]
-    middle_array = (hand[1] + hand[-1])
-    st_end_array = (hand[1] + hand[-1]) / 2
+    st_end_array = (hand[0] + hand[-1]) / 2
+    mid_index = len(hand) // 2
 
     print(st_end_array, new_array, card_avg)
 
-    if card_avg == card_average(new_array) :
+    if card_avg == hand[mid_index] :
         return True
     elif  st_end_array == card_avg :
         return True
@@ -95,7 +95,10 @@ def maybe_double_last(hand):
         list: The hand with Jacks (if present) value doubled.
     """
 
-    pass
-
-
-print(approx_average_is_average([1, 2, 4, 5, 8]))
+    if hand[-1] == 10 : 
+        return hand
+    elif hand[-1] < 10 : 
+        return hand
+    else :
+        new_value = hand[:-1] + [hand[-1] * 2]
+        return new_value
