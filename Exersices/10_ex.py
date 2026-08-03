@@ -13,8 +13,11 @@ def add_me_to_the_queue(express_queue, normal_queue, ticket_type, person_name):
     Returns:
         list: The (updated) queue the name was added to.
     """
-    
-
+    if ticket_type == 1 :
+        return express_queue + [person_name]
+    else :
+        return normal_queue + [person_name]
+        
 
 def find_my_friend(queue, friend_name):
     """Search the queue for a name and return their queue position (index).
@@ -27,7 +30,7 @@ def find_my_friend(queue, friend_name):
         int: The index at which the friends name was found.
     """
 
-    pass
+    return queue.index(friend_name)
 
 
 def add_me_with_my_friends(queue, index, person_name):
@@ -41,9 +44,8 @@ def add_me_with_my_friends(queue, index, person_name):
     Returns:
         list: The queue updated with new name.
     """
-
-    pass
-
+    queue.insert(index, person_name)
+    return queue
 
 def remove_the_mean_person(queue, person_name):
     """Remove the mean person from the queue by the provided name.
@@ -97,3 +99,5 @@ def sorted_names(queue):
     """
 
     pass
+
+print(add_me_with_my_friends(['Natasha', 'Steve', 'Tchalla', 'Wanda', 'Rocket'], 0, 'Bucky'))
