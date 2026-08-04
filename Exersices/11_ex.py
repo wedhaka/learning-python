@@ -1,72 +1,89 @@
-"""Functions for tracking poker hands and assorted card tasks.
+"""Functions for organizing and calculating student exam scores."""
 
-Python list documentation: https://docs.python.org/3/tutorial/datastructures.html
-"""
-
-def get_rounds(number):
-    """Create a list containing the current and next two round numbers.
-
+def round_scores(student_scores):
+    """Round all provided student scores.
     Parameters:
-        number (int): The current round number.
-
+        student_scores (list[float]): Student exam scores.
     Returns:
-        list: The current round number and the two that follow.
+        list[int]: Student scores *rounded* to the nearest integer value.
     """
-    return [i + number for i in range(3)]
+    rounded_score = list()
 
-def concatenate_rounds(rounds_1, rounds_2):
-    """Concatenate two lists of round numbers.
-    Parameters:
-        rounds_1 (list): The first rounds played.
-        rounds_2 (list): The second group of rounds played.
-    Returns:
-        list:  All rounds played.
-    """
-    return rounds_1 + rounds_2
+    for score in student_scores :
+        rounded_score.append(round(score))
+
+    return rounded_score
     
-def list_contains_round(rounds, number):
-    """Check if the list of rounds contains the specified number.
-    Parameters:
-        rounds (list): The rounds played.
-        number (int): The round number.
-    Returns:
-        bool: Was the round played?
-    """
-    if number in rounds :
-        return True
-
-    return False
-
-def card_average(hand):
-    """Calculate and returns the average card value from the list.
+def count_failed_students(student_scores):
+    """Count the number of failing students out of the group provided.
 
     Parameters:
-        hand (list): The cards in the hand.
+        student_scores (list[int]): Student scores as ints.
 
     Returns:
-        float: The average value of the cards in the hand.
+        int: The count of student scores at or below 40.
     """
-    return sum(hand)/len(hand)
+    return len([score for score in student_scores if score <= 40])
 
-def approx_average_is_average(hand):
-    """Return if the (average of first and last card values) OR ('middle' card) == calculated average.
+def above_threshold(student_scores, threshold):
+    """Determine how many of the provided student scores were 'the best' based on the provided threshold.
 
     Parameters:
-        hand (list): The cards in the hand.
+        student_scores (list[int]): Integer scores.
+        threshold (int): The threshold to cross to be the "best" score.
 
     Returns:
-        bool: Does one of the approximate averages equal the `true average`?
+        list[int]: Integer scores that are at or above the "best" threshold.
     """
-    card_avg = card_average(hand)
-    new_array = hand[:-1][1:]
-    middle_array = (hand[1] + hand[-1])
-    st_end_array = (hand[1] + hand[-1]) / 2
 
-    print(st_end_array, new_array, card_avg)
+    return [score for score in student_scores if score >= threshold]
 
-    if card_avg == card_average(new_array) :
-        return True
-    elif  st_end_array == card_avg :
-        return True
-    return False
+
+def letter_grades(highest):
+    """Create a list of grade thresholds based on the provided highest grade.
+
+    Parameters:
+        highest (int): The value of the highest exam score.
+
+    Returns:
+        list[int]: Lower threshold scores for each D-A letter grade interval.
+
+        For example, where the highest score is 100, and failing is <= 40,
+        The result would be [41, 56, 71, 86]:
+            41 <= "D" <= 55
+            56 <= "C" <= 70
+            71 <= "B" <= 85
+            86 <= "A" <= 100
+    """
     
+    return [score for score in student_scores if score >= threshold]
+    
+
+def student_ranking(student_scores, student_names):
+    """Organize the student's rank, name, and grade information in descending order.
+
+    Parameters:
+        student_scores (list): Scores in descending order.
+        student_names (list[str]): Student names by exam score in descending order.
+
+    Returns:
+        list[str]: Strings in format ["<rank>. <student name>: <score>"].
+    """
+
+    pass
+
+
+def perfect_score(student_info):
+    """Create a list that contains the name and grade of the first student to make a perfect score on the exam.
+
+    Parameters:
+        student_info (list[list[str, int]]): List of [<student name>, <score>] lists.
+
+    Returns:
+        list: First `[<student name>, 100]` found OR `[]` if no student score of 100 is found.
+    """
+
+    pass
+
+
+print(round_scores([0.5]))
