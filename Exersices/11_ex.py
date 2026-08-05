@@ -55,8 +55,7 @@ def letter_grades(highest):
             86 <= "A" <= 100
     """
     step = (highest - 40) // 4
-    return list(range(41, highest, step))
-    
+    return list(range(41, highest, step))  
 
 def student_ranking(student_scores, student_names):
     """Organize the student's rank, name, and grade information in descending order.
@@ -68,11 +67,11 @@ def student_ranking(student_scores, student_names):
     Returns:
         list[str]: Strings in format ["<rank>. <student name>: <score>"].
     """
+    
     return [
         f"{rank}. {name}: {score}"
         for rank, (name, score) in enumerate(zip(student_names, student_scores), start=1)
     ]
-
 
 def perfect_score(student_info):
     """Create a list that contains the name and grade of the first student to make a perfect score on the exam.
@@ -84,31 +83,10 @@ def perfect_score(student_info):
         list: First `[<student name>, 100]` found OR `[]` if no student score of 100 is found.
     """
 
-    # return [
-    #    [name, score] if score == 100 else [] for student in student_info for i, (name, score) in enumerate(student)    
-    # ]
-
-    # return next(([name, score] for student in student_info for i, (name, score) in enumerate(student)), [])
-
     values = []
-    for student in student_info :
-        result = []
-        for (name, score) in student :
-            if score == 100 : 
-                result = [name, score]
-                continue
-            else : 
-                result = []
-
-        return result
+    for (name, score) in student_info :
+        if score == 100 : 
+            values = [name, score]
+            break
+            
     return values
-        
-
-
-print(
-    perfect_score([
-        [['Joci', 100], ['Vlad', 100], ['Raiana', 100], ['Alessandro', 100]],
-        [['Jill', 30], ['Paul', 73]],
-        []
-    ])
-)
