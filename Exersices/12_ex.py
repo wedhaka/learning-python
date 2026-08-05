@@ -76,7 +76,7 @@ def clean_up(combined_record_group):
     """
     combined_all = ""
     for tp_values in combined_record_group :
-        combined_all = combined_all + str(tp_values) + '/n'
+        combined_all = combined_all + str(tp_values) + '/n '
 
     return combined_all
 
