@@ -75,7 +75,10 @@ def clean_up(combined_record_group):
 
     """
     combined_all = ""
-    for tp_values in combined_record_group :
+    for i, tp_values in enumerate(combined_record_group) :
+        if i == 1 : 
+            combined_all = combined_all + str(convert_coordinate(tp_values)) + '/n '
+
         combined_all = combined_all + str(tp_values) + '/n '
 
     return combined_all
