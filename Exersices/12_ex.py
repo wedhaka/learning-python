@@ -74,18 +74,12 @@ def clean_up(combined_record_group):
         (see HINTS.md for an example).
 
     """
-    combined_all = ""
-    for i, tp_values in enumerate(combined_record_group) :
-        if i == 1 : 
-            combined_all = combined_all + str(convert_coordinate(tp_values)) + '/n '
-
-        combined_all = combined_all + str(tp_values) + '/n '
-
-    return combined_all
+    report = []
+    for treasure, _, location, quadrant, owner in combined_record_group:
+        cleaned_record = (treasure, location, quadrant, owner)
+        report.append(str(cleaned_record))
+    
+    return "\n".join(report) + "\n"
 
 
-print(clean_up((
-    ('Brass Spyglass', '4B', 'Abandoned Lighthouse', ('4', 'B'), 'Blue'),
-    ('Vintage Pirate Hat', '7E', 'Quiet Inlet (Island of Mystery)', ('7', 'E'), 'Orange'),
-    ('Crystal Crab', '6A', 'Old Schooner', ('6', 'A'), 'Purple'))
-))
+print(clean_up((('Brass Spyglass', '4B', 'Abandoned Lighthouse', ('4', 'B'), 'Blue'), ('Vintage Pirate Hat', '7E', 'Quiet Inlet (Island of Mystery)', ('7', 'E'), 'Orange'), ('Crystal Crab', '6A', 'Old Schooner', ('6', 'A'), 'Purple'))))
