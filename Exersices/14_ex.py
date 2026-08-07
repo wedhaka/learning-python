@@ -27,3 +27,44 @@ def add_items(inventory, items):
 
     pass
 
+
+
+def decrement_items(inventory, items):
+    """Decrement items in inventory using elements from the `items` list.
+
+    Parameters:
+        inventory (dict): Inventory dictionary.
+        items (list): List of items to decrement from the inventory.
+
+    Returns:
+        dict: Updated inventory with items decremented.
+    """
+
+    pass
+
+
+def remove_item(inventory, item):
+    """Remove item from inventory if it matches `item` string.
+
+    Parameters:
+        inventory (dict): Inventory dictionary.
+        item (str): Item to remove from the inventory.
+
+    Returns:
+        dict: Updated inventory with item removed. Current inventory if item does not match.
+    """
+
+    pass
+
+
+def list_inventory(inventory):
+    """Create a list containing only available (item_name, item_count > 0) pairs in inventory.
+
+    Parameters:
+        inventory (dict): An inventory dictionary.
+
+    Returns:
+        list[tuple]: List of key, value tuples from the inventory dictionary.
+    """
+
+    pass
